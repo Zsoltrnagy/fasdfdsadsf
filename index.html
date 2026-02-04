@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PriceFirstNow - Instant Price Ranges</title>
+  <meta name="description" content="Instant local price ranges for remodeling, cleaning, plumbing, HVAC, and pet care in Palm Beach and Broward County." />
+
+  <style>
+    :root{
+      --bg:#070b34;
+      --text:#ffffff;
+      --muted:#c7d2fe;
+      --border:rgba(255,255,255,.16);
+      --shadow:0 22px 70px rgba(0,0,0,.45);
+      --accent:#22d3ee;
+      --accent2:#a78bfa;
+      --accent3:#34d399;
+      --ink:#031018;
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 650px at 10% -10%, rgba(34,211,238,.35), transparent),
+        radial-gradient(900px 650px at 90% 0%, rgba(167,139,250,.35), transparent),
+        radial-gradient(900px 650px at 70% 120%, rgba(52,211,153,.22), transparent),
+        var(--bg);
+      min-height:100vh;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .container{max-width:1180px;margin:0 auto;padding:22px}
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      padding:8px 0 18px;
+    }
+
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.2px}
+    .mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:var(--shadow)}
+    .brandName{font-size:18px}
+
+    nav{display:flex;gap:14px;flex-wrap:wrap}
+    nav a{font-weight:800;opacity:.9}
+    nav a:hover{opacity:1;text-decoration:underline}
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .heroLeft{padding:30px}
+    .heroRight{padding:20px}
+
+    h1{margin:0 0 12px;font-size:46px;line-height:1.05}
+    h2{margin:0 0 10px;font-size:22px}
+    h3{margin:0 0 6px}
+    .muted{color:var(--muted);line-height:1.55}
+
+    .ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+
+    .btn{
+      padding:12px 16px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.18);
+      font-weight:900;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      background:rgba(255,255,255,.10);
+      color:var(--text);
+      transition:transform .12s ease, opacity .12s ease;
+      user-select:none;
+    }
+
+    .btn.primary{
+      background:linear-gradient(135deg,var(--accent),var(--accent3));
+      border:0;
+      color:var(--ink);
+    }
+
+    .btn.ghost{background:rgba(255,255,255,.10)}
+
+    .btn:hover{transform:translateY(-1px);opacity:1}
+
+    .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .badge{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.08);
+      font-weight:900;
+      font-size:13px;
+    }
+
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    .tab{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.20);
+      background:rgba(255,255,255,.10);
+      cursor:pointer;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--ink);border:0}
+
+    form{display:grid;gap:10px}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+    label{font-size:12px;font-weight:900;color:var(--muted)}
+
+    input, select, textarea{
+      width:100%;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.22);
+      color:var(--text);
+      outline:none;
+    }
+    input:focus, select:focus, textarea:focus{border-color:rgba(34,211,238,.55)}
+
+    textarea{min-height:86px;resize:vertical}
+
+    .quoteBox{
+      margin-top:12px;
+      padding:16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.30);
+    }
+    .quoteAmt{font-size:26px;font-weight:1000;letter-spacing:.2px}
+    .fine{color:var(--muted);font-size:13px;line-height:1.55;margin:0}
+
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .mini{padding:16px}
+    .mini p{margin:0;color:var(--muted);line-height:1.55}
+
+    section{padding:20px;margin-top:18px;scroll-margin-top:90px}
+
+    footer{margin:28px 0 8px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+    .hidden{display:none !important;}
+
+    @media (max-width:960px){
+      .hero{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      h1{font-size:34px}
+      .heroLeft{padding:22px}
+      .heroRight{padding:16px}
+      .row2{grid-template-columns:1fr}
+      .btn{width:100%}
+      nav{justify-content:center}
+      header{flex-direction:column;align-items:flex-start}
+    }
+    @media (max-width:560px){
+      h1{font-size:36px;line-height:1.08}
+      .ctaRow{flex-direction:column}
+      .grid3{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="brand">
+      <div class="mark" aria-hidden="true"></div>
+      <div class="brandName">PriceFirstNow</div>
+    </div>
+    <nav>
+      <a href="#quote">Get Quote</a>
+      <a href="#how">How it works</a>
+      <a href="#providers">Providers</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <section class="card heroLeft">
+      <h1>See the price first.<br />Then choose your provider.</h1>
+      <p class="muted">Instant price ranges for home services in Broward and Palm Beach County. No calls. No pressure.</p>
+
+      <div class="ctaRow">
+        <button class="btn primary" type="button" id="scrollQuoteBtn">Get Instant Quote</button>
+        <button class="btn ghost" type="button" id="scrollProviderBtn">Become a Provider</button>
+      </div>
+
+      <div class="ctaRow" style="margin-bottom:12px">
+        <button class="btn ghost" type="button" id="downloadBtn">Download HTML</button>
+      </div>
+
+      <div class="badges">
+        <div class="badge">60-second estimate</div>
+        <div class="badge">Price-aware clients</div>
+        <div class="badge">Local matching</div>
+        <div class="badge">No bank info</div>
+      </div>
+    </section>
+
+    <section class="card heroRight" id="quote">
+      <div class="tabs" aria-label="Services">
+        <button class="tab active" type="button" data-svc="cleaning">Cleaning</button>
+        <button class="tab" type="button" data-svc="pet">Pet Care</button>
+        <button class="tab" type="button" data-svc="remodel">Remodeling</button>
+        <button class="tab" type="button" data-svc="plumbing">Plumbing</button>
+        <button class="tab" type="button" data-svc="hvac">HVAC</button>
+      </div>
+
+      <h2 style="margin-top:0">Instant Price Estimate</h2>
+
+      <form id="quoteForm" autocomplete="on">
+        <div class="row2">
+          <div>
+            <label for="county">County</label>
+            <select id="county" required>
+              <option value="broward" selected>Broward</option>
+              <option value="palmbeach">Palm Beach</option>
+            </select>
+          </div>
+          <div>
+            <label for="zip">ZIP Code</label>
+            <input id="zip" inputmode="numeric" maxlength="5" placeholder="33063" required />
+          </div>
+        </div>
+
+        <div>
+          <label for="service">Service type</label>
+          <select id="service"></select>
+        </div>
+
+        <div class="row2">
+          <div>
+            <label for="stories">Stories / access</label>
+            <select id="stories">
+              <option value="1-story / easy access" selected>1-story / easy access</option>
+              <option value="2-story">2-story</option>
+              <option value="3+ stories or condo">3+ stories or condo</option>
+              <option value="difficult access">Difficult access</option>
+            </select>
+          </div>
+          <div>
+            <label for="prep">Prep / repairs needed</label>
+            <select id="prep">
+              <option value="none" selected>None</option>
+              <option value="light (minor patching)">Light (minor patching)</option>
+              <option value="medium (repairs)">Medium (repairs)</option>
+              <option value="heavy (major repairs)">Heavy (major repairs)</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="sizeWrap">
+          <label for="size" id="sizeLabel">Area / size (sq ft)</label>
+          <input id="size" inputmode="numeric" placeholder="e.g. 500" />
+        </div>
+
+        <div id="paintingScopeWrap" class="hidden">
+          <label for="paintingScope">If painting: scope</label>
+          <select id="paintingScope">
+            <option value="Walls only" selected>Walls only</option>
+            <option value="Walls + ceilings">Walls + ceilings</option>
+            <option value="Ceilings only">Ceilings only</option>
+            <option value="Trim / doors">Trim / doors</option>
+            <option value="Full repaint">Full repaint</option>
+          </select>
+        </div>
+
+        <div id="flooringMaterialWrap" class="hidden">
+          <label for="flooringMaterial">Flooring material</label>
+          <select id="flooringMaterial">
+            <option value="Tile" selected>Tile</option>
+            <option value="Wood">Wood</option>
+            <option value="Natural stone">Natural stone</option>
+            <option value="Laminate">Laminate</option>
+            <option value="Carpet">Carpet</option>
+          </select>
+        </div>
+
+        <div id="petOptionsWrap" class="hidden">
+          <div class="row2">
+            <div>
+              <label for="petOption">Pet service option</label>
+              <select id="petOption"></select>
+            </div>
+            <div>
+              <label for="petCount">Number of pets</label>
+              <select id="petCount">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4+</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label for="notes">Notes (optional)</label>
+          <textarea id="notes" placeholder="e.g., condo rules, access, materials already purchased..."></textarea>
+        </div>
+
+        <div class="row2">
+          <div>
+            <label for="needWhen">When do you need it?</label>
+            <select id="needWhen">
+              <option value="Flexible" selected>Flexible</option>
+              <option value="ASAP">ASAP</option>
+              <option value="Within 1 week">Within 1 week</option>
+              <option value="Within 2-4 weeks">Within 2-4 weeks</option>
+              <option value="1-2 months">1-2 months</option>
+            </select>
+          </div>
+          <div>
+            <label for="serviceLevel">Service level</label>
+            <select id="serviceLevel">
+              <option value="Standard" selected>Standard</option>
+              <option value="Budget">Budget</option>
+              <option value="Premium">Premium</option>
+              <option value="Luxury">Luxury</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn primary" style="width:100%" type="button" id="showBtn">Show Price Range</button>
+
+        <div class="quoteBox" id="quoteBox" style="display:none">
+          <div class="quoteAmt" id="result"></div>
+          <p class="fine">Estimates are market-based ranges from local providers. Final pricing depends on scope, access, materials, and site conditions.</p>
+          <p class="fine" id="typical" style="margin-top:6px"></p>
+
+          <div class="row2" style="margin-top:12px">
+            <div>
+              <label for="leadName">Your name</label>
+              <input id="leadName" autocomplete="name" placeholder="John" />
+            </div>
+            <div>
+              <label for="leadPhone">Phone</label>
+              <input id="leadPhone" inputmode="tel" autocomplete="tel" placeholder="(954) 555-1234" />
+            </div>
+          </div>
+          <div style="margin-top:10px">
+            <label for="leadEmail">Email (required)</label>
+            <input id="leadEmail" type="email" autocomplete="email" placeholder="you@email.com" />
+          </div>
+
+          <div style="margin-top:10px">
+            <button class="btn ghost" type="button" id="matchBtn">Get Matched</button>
+          </div>
+          <p class="fine" id="matchStatus" style="margin-top:8px"></p>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div class="grid3" id="how">
+    <div class="card mini">
+      <h3>1) Answer a few questions</h3>
+      <p>We estimate based on service type and local market ranges.</p>
+    </div>
+    <div class="card mini">
+      <h3>2) Get a price range instantly</h3>
+      <p>Transparent ranges help you avoid surprises and reduce wasted calls.</p>
+    </div>
+    <div class="card mini">
+      <h3>3) Get matched with providers</h3>
+      <p>We route your request to providers that match your area and service.</p>
+    </div>
+  </div>
+
+  <section class="card" id="providers">
+    <h2>Become a Provider</h2>
+    <p class="muted">Get price-aware local leads. No monthly fee during launch.</p>
+
+    <label for="pname">Name</label>
+    <input id="pname" autocomplete="name" />
+
+    <label for="pcompany" style="margin-top:10px">Company</label>
+    <input id="pcompany" autocomplete="organization" />
+
+    <label for="pemail" style="margin-top:10px">Email</label>
+    <input id="pemail" type="email" autocomplete="email" />
+
+    <button class="btn primary" style="margin-top:14px" type="button" id="providerApplyBtn">Send Application</button>
+
+    <p class="fine" style="margin-top:10px">This MVP uses email to collect provider signups. Later, we can add a real form and database.</p>
+  </section>
+
+  <section class="card" id="contact">
+    <h2>Contact</h2>
+    <p class="muted">Questions or early access?</p>
+    <a id="contactLink" class="btn ghost" href="#">Email Us</a>
+    <p class="fine" style="margin-top:10px">Email: <span id="adminEmailText" style="font-weight:900"></span></p>
+    <p class="fine" style="margin-top:12px">Tip: In the footer, click Set admin email to change where leads are sent (no code editing needed).</p>
+  </section>
+
+  <footer>
+    <div>&copy; <span id="year"></span> PriceFirstNow</div>
+    <div><a href="#" id="setEmailLink" style="text-decoration:underline">Set admin email</a></div>
+  </footer>
+</div>
+
+<!-- Netlify Forms: hidden form definition so Netlify detects it -->
+<form name="lead" id="netlifyLeadForm" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden">
+  <input type="hidden" name="form-name" value="lead" />
+  <p class="hidden"><label>Do not fill this out: <input name="bot-field" /></label></p>
+  <input type="text" name="leadName" />
+  <input type="text" name="leadPhone" />
+  <input type="email" name="leadEmail" />
+  <input type="text" name="county" />
+  <input type="text" name="zip" />
+  <input type="text" name="category" />
+  <input type="text" name="serviceType" />
+  <input type="text" name="stories" />
+  <input type="text" name="prep" />
+  <input type="text" name="size" />
+  <input type="text" name="paintingScope" />
+  <input type="text" name="flooringMaterial" />
+  <input type="text" name="petOption" />
+  <input type="text" name="petCount" />
+  <input type="text" name="needWhen" />
+  <input type="text" name="serviceLevel" />
+  <input type="text" name="estimateLow" />
+  <input type="text" name="estimateHigh" />
+  <textarea name="notes"></textarea>
+</form>
+
+<script>
+(function(){
+  // Default email (editable via footer)
+  var DEFAULT_ADMIN_EMAIL = "pricefirstnow@gmail.com";
+  var ADMIN_EMAIL = localStorage.getItem("PFN_ADMIN_EMAIL") || DEFAULT_ADMIN_EMAIL;
+
+  var COUNTY_MULT = { broward: 1.00, palmbeach: 1.08 };
+
+  var SERVICE_LIST = {
+    cleaning: ["Residential", "Post Construction", "Office", "Commercial"],
+    pet: ["Walking", "Sitting", "Wash and Haircut"],
+    remodel: ["Interior Painting", "Exterior Painting", "Flooring", "Drywall", "Windows and Doors", "Carpentry", "Other"],
+    plumbing: ["New Construction or Remodel", "Leak Detection", "Water Supply System", "Drain-Waste-Vent (DWV)", "Water Heaters", "Disposal Replacement", "Other"],
+    hvac: ["Complete System Installation", "Ductwork", "Duct Cleaning", "Service and Repairs", "Preventive Maintenance", "Indoor Air Quality", "Controls and Energy Efficiency", "Commercial or Condo Work"]
+  };
+
+  var PET_OPTIONS = {
+    Walking: [
+      { label: "30-minute walk (small)", value: "walk_30_s", low: 22, high: 40 },
+      { label: "30-minute walk (medium)", value: "walk_30_m", low: 25, high: 45 },
+      { label: "30-minute walk (large)", value: "walk_30_l", low: 30, high: 55 },
+      { label: "60-minute walk (small)", value: "walk_60_s", low: 38, high: 65 },
+      { label: "60-minute walk (medium)", value: "walk_60_m", low: 42, high: 75 },
+      { label: "60-minute walk (large)", value: "walk_60_l", low: 50, high: 90 }
+    ],
+    Sitting: [
+      { label: "Drop-in visit (small)", value: "sit_dropin_s", low: 28, high: 50 },
+      { label: "Drop-in visit (medium)", value: "sit_dropin_m", low: 32, high: 60 },
+      { label: "Drop-in visit (large)", value: "sit_dropin_l", low: 38, high: 70 },
+      { label: "Overnight (small)", value: "sit_overnight_s", low: 85, high: 150 },
+      { label: "Overnight (medium)", value: "sit_overnight_m", low: 95, high: 170 },
+      { label: "Overnight (large)", value: "sit_overnight_l", low: 110, high: 200 }
+    ],
+    "Wash and Haircut": [
+      { label: "Small pet", value: "groom_small", low: 70, high: 120 },
+      { label: "Medium pet", value: "groom_medium", low: 90, high: 160 },
+      { label: "Large pet", value: "groom_large", low: 120, high: 220 }
+    ]
+  };
+
+  var activeCategory = "cleaning";
+
+  function $(id){ return document.getElementById(id); }
+
+  function money(n){ return "$" + Math.round(Number(n)).toLocaleString(); }
+
+  function validateZip(v){ return /^[0-9]{5}$/.test(String(v || "").trim()); }
+
+  function applyConfidenceBand(lo, hi){ return { lo: lo * 1.05, hi: hi * 0.80 }; }
+
+  function typicalBand(lo, hi){
+    var span = Math.max(0, hi - lo);
+    return { lo: lo + span * 0.35, hi: lo + span * 0.65 };
+  }
+
+  function encodeForm(data){
+    var parts = [];
+    for(var k in data){
+      if(!Object.prototype.hasOwnProperty.call(data, k)) continue;
+      var v = data[k];
+      if(v === undefined || v === null) v = "";
+      parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(String(v)));
+    }
+    return parts.join("&");
+  }
+
+  function setMatchStatus(msg, ok){
+    var el = $("matchStatus");
+    if(!el) return;
+    el.textContent = msg || "";
+    el.style.color = ok ? "#bbf7d0" : "#fecaca";
+  }
+
+  function openMailto(subject, bodyText){
+    var href = "mailto:" + ADMIN_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(bodyText);
+    try{ window.location.href = href; } catch(e){}
+  }
+
+  function refreshMailLinks(){
+    var link = $("contactLink");
+    var txt = $("adminEmailText");
+    if(txt) txt.textContent = ADMIN_EMAIL;
+
+    if(link){
+      link.onclick = function(e){
+        e.preventDefault();
+        openMailto("PriceFirstNow Inquiry", "Hello, I have a question about PriceFirstNow.
+
+My question: ");
+        return false;
+      };
+    }
+  }
+
+  function setAdminEmail(){
+    var next = prompt("Enter the email where you want to receive leads:", ADMIN_EMAIL);
+    if(!next) return;
+    ADMIN_EMAIL = String(next).trim();
+    localStorage.setItem("PFN_ADMIN_EMAIL", ADMIN_EMAIL);
+    refreshMailLinks();
+    alert("Saved. Leads will be emailed to: " + ADMIN_EMAIL);
+  }
+
+  function refreshPetOptions(){
+    var wrap = $("petOptionsWrap");
+    var sel = $("petOption");
+    if(!wrap || !sel) return;
+
+    if(activeCategory !== "pet"){
+      wrap.classList.add("hidden");
+      return;
+    }
+
+    wrap.classList.remove("hidden");
+    var subtype = $("service").value;
+    var opts = PET_OPTIONS[subtype] || [];
+
+    sel.innerHTML = "";
+    for(var i=0;i<opts.length;i++){
+      var o = opts[i];
+      var opt = document.createElement("option");
+      opt.value = o.value;
+      opt.textContent = o.label;
+      sel.appendChild(opt);
+    }
+
+    if(!opts.length){
+      var opt2 = document.createElement("option");
+      opt2.value = "default";
+      opt2.textContent = "Standard";
+      sel.appendChild(opt2);
+    }
+  }
+
+  function isPaintingSubtype(){
+    var subtype = String($("service").value || "").toLowerCase();
+    return subtype.indexOf("painting") !== -1;
+  }
+
+  function isFlooringSubtype(){ return String($("service").value || "") === "Flooring"; }
+
+  function isDisposalSubtype(){ return String($("service").value || "") === "Disposal Replacement"; }
+
+  function hideQuote(){
+    var qb = $("quoteBox");
+    if(qb) qb.style.display = "none";
+    setMatchStatus("", true);
+  }
+
+  function refreshConditionalFields(){
+    var paintWrap = $("paintingScopeWrap");
+    if(paintWrap) paintWrap.classList.toggle("hidden", !isPaintingSubtype());
+
+    var floorWrap = $("flooringMaterialWrap");
+    if(floorWrap) floorWrap.classList.toggle("hidden", !isFlooringSubtype());
+
+    var sizeWrap = $("sizeWrap");
+    if(sizeWrap) sizeWrap.classList.toggle("hidden", activeCategory === "pet");
+
+    var sizeLabel = $("sizeLabel");
+    var sizeInput = $("size");
+    if(sizeLabel && sizeInput && activeCategory !== "pet"){
+      if(isDisposalSubtype()){
+        sizeLabel.textContent = "Quantity";
+        sizeInput.placeholder = "e.g. 1";
+      } else {
+        sizeLabel.textContent = "Area / size (sq ft)";
+        sizeInput.placeholder = "e.g. 500";
+      }
+    }
+
+    refreshPetOptions();
+  }
+
+  function setCategory(cat){
+    activeCategory = cat;
+
+    var tabs = document.querySelectorAll(".tab");
+    for(var i=0;i<tabs.length;i++){
+      var b = tabs[i];
+      b.classList.toggle("active", b.getAttribute("data-svc") === cat);
+    }
+
+    var sel = $("service");
+    sel.innerHTML = "";
+    var list = SERVICE_LIST[cat] || [];
+    for(var j=0;j<list.length;j++){
+      var name = list[j];
+      var opt = document.createElement("option");
+      opt.value = name;
+      opt.textContent = name;
+      sel.appendChild(opt);
+    }
+
+    if(sel.options.length > 0) sel.selectedIndex = 0;
+
+    refreshConditionalFields();
+    hideQuote();
+  }
+
+  function calculate(){
+    var county = $("county").value;
+    var zip = $("zip").value.trim();
+
+    if(!validateZip(zip)){
+      alert("Please enter a 5-digit ZIP code.");
+      return null;
+    }
+
+    var subtype = $("service").value;
+    var stories = $("stories").value;
+    var prep = $("prep").value;
+    var needWhen = $("needWhen").value;
+    var serviceLevel = $("serviceLevel").value;
+    var paintingScope = $("paintingScope").value;
+    var flooringMaterial = $("flooringMaterial").value;
+    var notes = $("notes").value.trim();
+
+    var rawSize = String($("size").value || "").trim();
+    var size = Number(rawSize);
+
+    if(activeCategory === "pet"){
+      size = 1;
+    } else if(isDisposalSubtype()){
+      if(!size || size < 1){
+        size = 1;
+        $("size").value = "1";
+      }
+    } else {
+      if(!size || size < 1){
+        alert("Enter a realistic size.");
+        return null;
+      }
+    }
+
+    var low, high;
+
+    if(isDisposalSubtype()){
+      var qty = Math.max(1, size || 1);
+      low = 250 * qty;
+      high = 650 * qty;
+    } else if(activeCategory === "pet"){
+      var petCountRaw = Number($("petCount").value || 1);
+      var petCount = Math.max(1, petCountRaw >= 4 ? 4 : petCountRaw);
+
+      var optionValue = $("petOption").value;
+      var options = PET_OPTIONS[subtype] || [];
+      var found = null;
+      for(var k=0;k<options.length;k++){
+        if(options[k].value === optionValue){ found = options[k]; break; }
+      }
+      if(!found && options.length) found = options[0];
+
+      var perLow = found ? found.low : 30;
+      var perHigh = found ? found.high : 60;
+      var extraPetMult = (petCount === 1) ? 1.00 : (petCount === 2 ? 1.35 : (petCount === 3 ? 1.60 : 1.80));
+
+      low = perLow * extraPetMult;
+      high = perHigh * extraPetMult;
+    } else {
+      low = size * 1.5;
+      high = size * 3.5;
+    }
+
+    var svcMult = { cleaning: 1.0, pet: 1.0, remodel: 1.25, plumbing: 1.15, hvac: 1.4 };
+    var m = svcMult[activeCategory] || 1.0;
+    low *= m;
+    high *= m;
+
+    var accessMult = {
+      "1-story / easy access": 1.00,
+      "2-story": 1.06,
+      "3+ stories or condo": 1.10,
+      "difficult access": 1.14
+    };
+    var am = accessMult[stories] || 1.0;
+    low *= am; high *= am;
+
+    var prepMult = {
+      none: 1.00,
+      "light (minor patching)": 1.05,
+      "medium (repairs)": 1.12,
+      "heavy (major repairs)": 1.22
+    };
+    var pm = prepMult[prep] || 1.0;
+    low *= pm; high *= pm;
+
+    var levelMult = { Budget: 0.92, Standard: 1.00, Premium: 1.12, Luxury: 1.25 };
+    var lm = levelMult[serviceLevel] || 1.0;
+    low *= lm; high *= lm;
+
+    if(isFlooringSubtype()){
+      var matMult = { Tile: 1.00, Wood: 1.12, "Natural stone": 1.35, Laminate: 0.85, Carpet: 0.80 };
+      var mm = matMult[flooringMaterial] || 1.0;
+      low *= mm; high *= mm;
+    }
+
+    var cm = COUNTY_MULT[county] || 1.0;
+    low *= cm; high *= cm;
+
+    var c = applyConfidenceBand(low, high);
+    low = c.lo; high = c.hi;
+
+    return {
+      low: low,
+      high: high,
+      county: county,
+      zip: zip,
+      cat: activeCategory,
+      subtype: subtype,
+      stories: stories,
+      prep: prep,
+      needWhen: needWhen,
+      serviceLevel: serviceLevel,
+      paintingScope: isPaintingSubtype() ? paintingScope : "",
+      flooringMaterial: isFlooringSubtype() ? flooringMaterial : "",
+      petOption: activeCategory === "pet" ? $("petOption").value : "",
+      petCount: activeCategory === "pet" ? $("petCount").value : "",
+      notes: notes
+    };
+  }
+
+  function submitLeadToNetlify(payload, onDone){
+    // Netlify Forms works only when hosted on Netlify. file:// will fail.
+    var isLocalFile = (window.location && window.location.protocol === "file:");
+    if(isLocalFile){
+      onDone(new Error("local-file"), false, 0);
+      return;
+    }
+
+    var body = encodeForm(payload);
+    var postUrl = "/"; // safest for Netlify Forms
+
+    if(typeof fetch === "function"){
+      fetch(postUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body
+      }).then(function(res){
+        var ok = !!res && (res.status >= 200 && res.status < 400);
+        onDone(null, ok, res ? res.status : 0);
+      }).catch(function(err){
+        onDone(err, false, 0);
+      });
+      return;
+    }
+
+    try{
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", postUrl, true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+          var ok = (xhr.status >= 200 && xhr.status < 400);
+          onDone(null, ok, xhr.status);
+        }
+      };
+      xhr.send(body);
+    } catch(e){
+      onDone(e, false, 0);
+    }
+  }
+
+  function providerApply(){
+    var name = $("pname").value.trim();
+    var company = $("pcompany").value.trim();
+    var email = $("pemail").value.trim();
+
+    if(!name || !email){
+      alert("Please enter at least your name and email.");
+      return;
+    }
+
+    var body = "Provider application
+" +
+      "Name: " + name + "
+" +
+      "Company: " + company + "
+" +
+      "Email: " + email + "
+";
+
+    openMailto("Provider Application", body);
+  }
+
+  function scrollToId(sel){
+    var el = document.querySelector(sel);
+    if(el && el.scrollIntoView){
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  // --- Wire events safely ---
+  $("scrollQuoteBtn").addEventListener("click", function(){ scrollToId("#quote"); });
+  $("scrollProviderBtn").addEventListener("click", function(){ scrollToId("#providers"); });
+
+  var tabs = document.querySelectorAll(".tab");
+  for(var i=0;i<tabs.length;i++){
+    (function(btn){
+      btn.addEventListener("click", function(){
+        setCategory(btn.getAttribute("data-svc"));
+      });
+    })(tabs[i]);
+  }
+
+  $("service").addEventListener("change", function(){ refreshConditionalFields(); hideQuote(); });
+  $("petOption").addEventListener("change", hideQuote);
+  $("petCount").addEventListener("change", hideQuote);
+  $("county").addEventListener("change", hideQuote);
+  $("zip").addEventListener("input", hideQuote);
+  $("stories").addEventListener("change", hideQuote);
+  $("prep").addEventListener("change", hideQuote);
+  $("needWhen").addEventListener("change", hideQuote);
+  $("serviceLevel").addEventListener("change", hideQuote);
+  $("size").addEventListener("input", hideQuote);
+  $("flooringMaterial").addEventListener("change", hideQuote);
+  $("paintingScope").addEventListener("change", hideQuote);
+
+  $("showBtn").addEventListener("click", function(){
+    var r = calculate();
+    if(!r) return;
+
+    $("result").innerText = money(r.low) + " - " + money(r.high);
+
+    var t = typicalBand(r.low, r.high);
+    $("typical").innerText = "Most similar jobs land around " + money(t.lo) + " - " + money(t.hi);
+
+    // keep fields (do not clear) - user asked email required; keep what they typed
+    $("quoteBox").style.display = "block";
+  });
+
+  $("matchBtn").addEventListener("click", function(){
+    setMatchStatus("", true);
+
+    var r = calculate();
+    if(!r) return;
+
+    var name = String($("leadName").value || "").trim();
+    var phone = String($("leadPhone").value || "").trim();
+    var email = String($("leadEmail").value || "").trim();
+
+    if(!name){ alert("Please enter your name."); $("leadName").focus(); return; }
+    if(!phone){ alert("Please enter your phone number."); $("leadPhone").focus(); return; }
+    if(!email){ alert("Email is required to get matched."); $("leadEmail").focus(); return; }
+    if(email.indexOf("@") === -1 || email.indexOf(".") === -1){ alert("Please enter a valid email address."); $("leadEmail").focus(); return; }
+
+    var payload = {
+      "form-name": "lead",
+      leadName: name,
+      leadPhone: phone,
+      leadEmail: email,
+      county: r.county,
+      zip: r.zip,
+      category: r.cat,
+      serviceType: r.subtype || "",
+      stories: r.stories || "",
+      prep: r.prep || "",
+      size: (r.cat === "pet") ? "" : String($("size").value || ""),
+      paintingScope: r.paintingScope || "",
+      flooringMaterial: r.flooringMaterial || "",
+      petOption: r.petOption || "",
+      petCount: r.petCount || "",
+      needWhen: r.needWhen || "",
+      serviceLevel: r.serviceLevel || "",
+      estimateLow: String(Math.round(r.low)),
+      estimateHigh: String(Math.round(r.high)),
+      notes: r.notes || ""
+    };
+
+    setMatchStatus("Sending...", true);
+
+    submitLeadToNetlify(payload, function(err, ok, status){
+      if(ok){
+        setMatchStatus("Submitted! A provider will contact you soon.", true);
+      } else {
+        var help = "Submission failed. ";
+        if(err && String(err.message || err).indexOf("local-file") !== -1){
+          help += "This works only on the live Netlify website (not when opened as a file).";
+        } else {
+          help += "If you are not hosting on Netlify, Netlify Forms will not work. Use Contact -> Email Us.";
+        }
+        setMatchStatus(help, false);
+
+        // Fallback: open email draft so the lead is not lost
+        var fallbackBody = "Lead request (fallback)
+" +
+          "Name: " + name + "
+" +
+          "Phone: " + phone + "
+" +
+          "Email: " + email + "
+" +
+          "County: " + r.county + "
+" +
+          "ZIP: " + r.zip + "
+" +
+          "Category: " + r.cat + "
+" +
+          "Service: " + r.subtype + "
+" +
+          (r.flooringMaterial ? ("Flooring material: " + r.flooringMaterial + "
+") : "") +
+          (r.paintingScope ? ("Painting scope: " + r.paintingScope + "
+") : "") +
+          (r.petOption ? ("Pet option: " + r.petOption + "
+") : "") +
+          (r.petCount ? ("Pet count: " + r.petCount + "
+") : "") +
+          "Estimate: " + money(r.low) + " - " + money(r.high) + "
+" +
+          (r.notes ? ("Notes: " + r.notes + "
+") : "");
+
+        if(status === 0 || status >= 400){
+          openMailto("Lead Request (fallback)", fallbackBody);
+        }
+      }
+    });
+  });
+
+  $("providerApplyBtn").addEventListener("click", providerApply);
+
+  // Download current page as HTML file
+  $("downloadBtn").addEventListener("click", function(){
+    var html = "<!DOCTYPE html>
+" + document.documentElement.outerHTML;
+    var blob = new Blob([html], { type: "text/html;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "index.html";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  // Init
+  refreshMailLinks();
+  $("year").innerText = String(new Date().getFullYear());
+  $("setEmailLink").addEventListener("click", function(e){ e.preventDefault(); setAdminEmail(); });
+
+  // Ensure services populate on load (this fixes the "empty service type" problem)
+  setCategory("cleaning");
+
+  // --- Minimal tests ---
+  (function(){
+    try{
+      console.assert(document.getElementById("service").options.length > 0, "[tests] service dropdown should populate on load");
+      console.assert(document.querySelectorAll(".tab").length === 5, "[tests] should have 5 category tabs");
+      // Switching category should populate different options
+      setCategory("hvac");
+      console.assert(document.getElementById("service").options.length > 0, "[tests] hvac should have service options");
+      setCategory("cleaning");
+    } catch(e){}
+  })();
+})();
+</script>
+
+</body>
+</html>
